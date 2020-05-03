@@ -5,20 +5,22 @@
   
 
   
-  <title>node-learn01 | 异次元空间</title>
+  <title>node-learn02 | 异次元空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言：现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解菜鸟教程 Node.js 就是运行在服务端的 JavaScript。  Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I&#x2F;O服务端JavaScript">
+  <meta name="description" content="nodejs学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="node-learn01">
-<meta property="og:url" content="http://yoursite.com/2020/05/02/node-learn01/index.html">
+<meta property="og:title" content="node-learn02">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/node-learn02/index.html">
 <meta property="og:site_name" content="异次元空间">
-<meta property="og:description" content="前言：现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解菜鸟教程 Node.js 就是运行在服务端的 JavaScript。  Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。 Node.js是一个事件驱动I&#x2F;O服务端JavaScript">
+<meta property="og:description" content="nodejs学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-02T14:38:25.000Z">
-<meta property="article:modified_time" content="2020-05-03T10:12:52.786Z">
+<meta property="og:image" content="http://203.195.133.214/imgaes/nodejs/node-learn02-01.png">
+<meta property="article:published_time" content="2020-05-03T07:00:25.000Z">
+<meta property="article:modified_time" content="2020-05-03T10:13:21.153Z">
 <meta property="article:author" content="如舟">
 <meta property="article:tag" content="nodejs-learn">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://203.195.133.214/imgaes/nodejs/node-learn02-01.png">
   
     <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
   
@@ -73,10 +75,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-node-learn01" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-node-learn02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/05/02/node-learn01/" class="article-date">
-  <time datetime="2020-05-02T14:38:25.000Z" itemprop="datePublished">2020-05-02</time>
+    <a href="/2020/05/03/node-learn02/" class="article-date">
+  <time datetime="2020-05-03T07:00:25.000Z" itemprop="datePublished">2020-05-03</time>
 </a>
     
   <div class="article-category">
@@ -91,7 +93,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      node-learn01
+      node-learn02
     </h1>
   
 
@@ -99,29 +101,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-tutorial.html" target="_blank" rel="noopener">菜鸟教程</a></p>
-<p>Node.js 就是运行在服务端的 JavaScript。 </p>
-<p>Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。</p>
-<p>Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-http-server.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong><code>Node.js</code> 创建第一个应用</strong></p>
+<p>该应用有以下几个部分组成：</p>
+<ol>
+<li><strong>引入 required 模块：</strong>我们可以使用 <strong>require</strong> 指令来载入 <code>Node.js</code> 模块。</li>
+<li><strong>创建服务器：</strong>服务器可以监听客户端的请求，类似于 <code>Apache</code> 、<code>Nginx</code> 等 HTTP 服务器。</li>
+<li><strong>接收请求与响应请求</strong> 服务器很容易创建，客户端可以使用浏览器或终端发送 HTTP 请求，服务器接收请求后返回响应数据。</li>
+</ol>
 <a id="more"></a>
 
+<p><strong>创建 <code>Node.js</code> 应用</strong></p>
+<p>实例如下，在项目的根目录下创建一个叫 <code>server.js</code>的文件，并写入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;step1 引入 required 模块</span><br><span class="line">var http &#x3D; require(&#39;http&#39;);</span><br><span class="line">&#x2F;&#x2F;step2 创建服务器</span><br><span class="line">http.createServer(function(request,response)&#123;</span><br><span class="line">  &#x2F;&#x2F;发送 HTTP 头部</span><br><span class="line">  &#x2F;&#x2F;HTTP 状态值：200  OK</span><br><span class="line">  &#x2F;&#x2F;内容类型： text&#x2F;plain</span><br><span class="line">  response.writeHead(200,&#123;&#39;Content-Type&#39;:&#39;text&#x2F;plain&#39;&#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;发送响应数据 “Hello World”</span><br><span class="line">  response.end(&#39;Hello World\n&#39;);</span><br><span class="line">&#125;).listen(8080);</span><br><span class="line"></span><br><span class="line">console.log(&#39;Server running at http:&#x2F;&#x2F;127.0.0.1:8080&#39;);</span><br></pre></td></tr></table></figure>
 
-<p><strong>脚本模式</strong>：<br>第一个Node.js程序：Hello World！</p>
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&quot;Hello World&quot;);</span><br></pre></td></tr></table></figure>
+<p>以上代码我们完成了一个可以工作的 HTTP 服务器。</p>
+<p>使用 <strong>node</strong> 命令执行以上的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node server.js</span><br><span class="line">Server running at http:&#x2F;&#x2F;127.0.0.1:8080</span><br></pre></td></tr></table></figure>
 
-<p>保存改文件，文件名为helloworld.js,并通过 node命令来执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node helloworld.js</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure>
-
-<p>程序执行后，正常的话，就会在终端输出 Hello World。</p>
-<p><strong>交互模式：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">Welcome to Node.js v12.16.3.</span><br><span class="line">Type &quot;.help&quot; for more information.</span><br><span class="line">&gt; console.log(&quot;Hello World&quot;);</span><br><span class="line">Hello World</span><br></pre></td></tr></table></figure>
-
+<p>接下来，打开浏览器访问 <a href="http://127.0.0.1:8080/，你会看到一个写着" target="_blank" rel="noopener">http://127.0.0.1:8080/，你会看到一个写着</a> “Hello World”的网页。</p>
+<p><img src="http://203.195.133.214/imgaes/nodejs/node-learn02-01.png" alt=""></p>
+<p><strong>分析<code>Node.js</code> 的 HTTP 服务器：</strong></p>
+<ul>
+<li>第一行请求（require）<code>Node.js</code> 自带的 <code>http</code> 模块，并且把它赋值给 <code>http</code> 变量。</li>
+<li>接下来我们调用 <code>http</code> 模块提供的函数： <code>createServer</code> 。这个函数会返回 一个对象，这个对象有一个叫做 listen 的方法，这个方法有一个数值参数， 指定这个 HTTP 服务器监听的端口号。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/02/node-learn01/" data-id="ck9qwe9yr0004y3ynfy2fa162" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/03/node-learn02/" data-id="ck9qwe9yw0007y3ynfqrvh3r2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
@@ -132,19 +141,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/05/03/node-learn02/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/03/node-learn03/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          node-learn02
+          node-learn03
         
       </div>
     </a>
   
   
-    <a href="/2020/05/01/myFirst/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/05/02/node-learn01/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">myFirst</div>
+      <div class="article-nav-title">node-learn01</div>
     </a>
   
 </nav>

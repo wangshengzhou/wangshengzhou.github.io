@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>node-learn03 | 异次元空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-learn03">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/node-learn03/index.html">
+<meta property="og:site_name" content="异次元空间">
+<meta property="og:description" content="nodejs学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-03T10:11:39.000Z">
+<meta property="article:modified_time" content="2020-05-03T10:13:56.449Z">
+<meta property="article:author" content="如舟">
+<meta property="article:tag" content="nodejs-learn">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">异次元空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-learn03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/03/node-learn03/" class="article-date">
+  <time datetime="2020-05-03T10:11:39.000Z" itemprop="datePublished">2020-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node-learn03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-repl.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong><code>Node.js</code> <code>REPL</code>(交互式解释器)</strong><br><code>Node.js</code> <code>REPL</code>(<code>Read Eval Print Loop</code>:交互式解释器) 表示一个电脑的环境，类似 Window 系统的终端或 Unix/Linux shell，我们可以在终端中输入命令，并接收系统的响应。</p>
+<p>Node 自带了交互式解释器，可以执行以下任务：</p>
+<ul>
+<li><strong>读取</strong> - 读取用户输入，解析输入了Javascript 数据结构并存储在内存中。</li>
+<li><strong>执行</strong> - 执行输入的数据结构</li>
+<li><strong>打印</strong> - 输出结果</li>
+<li><strong>循环</strong> - 循环操作以上步骤直到用户两次按下 <strong>ctrl-c</strong> 按钮退出</li>
+</ul>
+<a id="more"></a>
+
+<p>Node 的交互式解释器可以很好的调试 Javascript 代码。</p>
+<p>首先，启动终端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">Welcome to Node.js v12.16.3.</span><br><span class="line">Type &quot;.help&quot; for more information.</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这时我们就可以在 &gt; 后输入简单的表达式，并按下回车键来计算结果。</p>
+<p><strong>使用变量:</strong></p>
+<p>变量声明需要使用 <strong>var</strong> 关键字，如果没有使用 var 关键字变量会直接打印出来。</p>
+<p>使用 <strong>var</strong> 关键字的变量可以使用 <code>console.log()</code> 来输出变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">Welcome to Node.js v12.16.3.</span><br><span class="line">Type &quot;.help&quot; for more information.</span><br><span class="line">&gt; a&#x3D;1</span><br><span class="line">1</span><br><span class="line">&gt; var b&#x3D;5</span><br><span class="line">undefined</span><br><span class="line">&gt; a+b</span><br><span class="line">6</span><br><span class="line">&gt; console.log(a+b)</span><br><span class="line">6</span><br><span class="line">undefined</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>多行表达式：</strong></p>
+<p><code>Node REPL</code> 支持输入多行表达式，这就有点类似 JavaScript。接下来让我们来执行一个 do-while 循环：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">Welcome to Node.js v12.16.3.</span><br><span class="line">Type &quot;.help&quot; for more information.</span><br><span class="line">&gt; var i&#x3D;0</span><br><span class="line">undefined</span><br><span class="line">&gt; do&#123; i++;</span><br><span class="line">... console.log(&quot;i&#x3D;&quot;+i);</span><br><span class="line">... &#125; while(i&lt;5);</span><br><span class="line">i&#x3D;1</span><br><span class="line">i&#x3D;2</span><br><span class="line">i&#x3D;3</span><br><span class="line">i&#x3D;4</span><br><span class="line">i&#x3D;5</span><br><span class="line">undefined</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>…</strong> 三个点的符号是系统自动生成的，回车换行后即可。Node 会自动检测是否为连续的表达式。</p>
+<p><strong>下划线(_)变量</strong></p>
+<p>可以使用下划线(_)获取上一个表达式的运算结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ node</span><br><span class="line">Welcome to Node.js v12.16.3.</span><br><span class="line">Type &quot;.help&quot; for more information.</span><br><span class="line">&gt; var a&#x3D;0,b&#x3D;10,c&#x3D;20</span><br><span class="line">undefined</span><br><span class="line">&gt; a+b+c</span><br><span class="line">30</span><br><span class="line">&gt; var sum&#x3D;_</span><br><span class="line">undefined</span><br><span class="line">&gt; console.log(sum)</span><br><span class="line">30</span><br><span class="line">undefined</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="REPL-命令"><a href="#REPL-命令" class="headerlink" title="REPL 命令"></a><code>REPL</code> 命令</h2><ul>
+<li><strong>ctrl + c</strong> - 退出当前终端。</li>
+<li><strong>ctrl + c 按下两次</strong> - 退出 Node REPL。</li>
+<li><strong>ctrl + d</strong> - 退出 Node REPL.</li>
+<li><strong>向上/向下 键</strong> - 查看输入的历史命令</li>
+<li><strong>tab 键</strong> - 列出当前命令</li>
+<li><strong>.help</strong> - 列出使用命令</li>
+<li><strong>.break</strong> - 退出多行表达式</li>
+<li><strong>.clear</strong> - 退出多行表达式</li>
+<li><strong>.save filename</strong> - 保存当前的 Node REPL 会话到指定文件</li>
+<li><strong>.load filename</strong> - 载入当前 Node REPL 会话的文件内容。</li>
+<li><strong>.exit</strong> 退出当前终端</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/03/node-learn03/" data-id="ck9qwe9yy0008y3ynemyg6nv2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/05/03/node-learn02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">node-learn02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/nodejs-learn/" style="font-size: 20px;">nodejs-learn</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/03/node-learn03/">node-learn03</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn02/">node-learn02</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/02/node-learn01/">node-learn01</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/01/myFirst/">myFirst</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/01/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 如舟<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
