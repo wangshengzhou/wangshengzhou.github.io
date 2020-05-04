@@ -73,6 +73,109 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-node-learn05" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/node-learn05/" class="article-date">
+  <time datetime="2020-05-04T04:29:06.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/04/node-learn05/">node-learn05</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-event-loop.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong>Node.js 事件循环</strong></p>
+<p>Node.js 是单进程单线程应用程序，但是因为 <a href="https://www.jianshu.com/p/81f6ded64ab2" target="_blank" rel="noopener"><code>V8</code></a> 引擎提供的异步执行回调接口，通过这些接口可以处理大量的并发，所以性能非常高。</p>
+<p>Node.js 基本上所有的事件机制都是用设计模式中观察者模式实现。</p>
+<p>Node.js 单线程类似进入一个while(true)的事件循环，直到没有事件观察者退出，每个异步事件都生成一个事件观察者，如果有事件发生就调用该回调函数.</p>
+<p><strong>事件驱动程序</strong></p>
+        
+          <p class="article-more-link">
+            <a href="/2020/05/04/node-learn05/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/04/node-learn05/" data-id="ck9rzjhk9000dh1ynd46m2jli" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-node-learn04" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/03/node-learn04/" class="article-date">
+  <time datetime="2020-05-03T12:28:51.000Z" itemprop="datePublished">2020-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/05/03/node-learn04/">node-learn04</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-callback.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong><code>Node.js</code> 回调函数</strong></p>
+<p><code>Node.js</code> 异步编程的直接体现就是回调。异步编程借助于回调来实现，但不能说使用了回调后程序就异步化了。回调函数在完成任务后就会被调用，Node 所有 <code>API</code> 都支持回调函数。</p>
+<p>例如，程序可以一边读取文件，一边执行其他命令，在文件读取完成后，将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这极大地提高了 <code>Node.js</code> 的性能，可以处理大量的并发请求。</p>
+<p>回调函数一般作为函数的最后一个参数出现：</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/05/03/node-learn04/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/03/node-learn04/" data-id="ck9rzjhk70009h1ynhgsufun7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-node-learn03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/05/03/node-learn03/" class="article-date">
@@ -116,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/03/node-learn03/" data-id="ck9qwe9yy0008y3ynemyg6nv2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/03/node-learn03/" data-id="ck9rzjhk50008h1yncur5hy7b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
@@ -170,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/03/node-learn02/" data-id="ck9qwe9yw0007y3ynfqrvh3r2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/03/node-learn02/" data-id="ck9rzjhk10007h1ync16z3pw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
@@ -220,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/02/node-learn01/" data-id="ck9qwe9yr0004y3ynfy2fa162" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/02/node-learn01/" data-id="ck9rzjhjx0004h1yne64uen12" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
@@ -263,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/01/myFirst/" data-id="ck9qwe9yn0002y3yn84xsfbq3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/01/myFirst/" data-id="ck9rzjhjv0002h1yn9ezm8m6k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
@@ -314,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/05/01/hello-world/" data-id="ck9qwe9y20000y3yn4qv7gy3q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/05/01/hello-world/" data-id="ck9rzjhjd0000h1yn2z1i08tw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,6 +479,14 @@
       <ul>
         
           <li>
+            <a href="/2020/05/04/node-learn05/">node-learn05</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn04/">node-learn04</a>
+          </li>
+        
+          <li>
             <a href="/2020/05/03/node-learn03/">node-learn03</a>
           </li>
         
@@ -385,14 +496,6 @@
         
           <li>
             <a href="/2020/05/02/node-learn01/">node-learn01</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/01/myFirst/">myFirst</a>
-          </li>
-        
-          <li>
-            <a href="/2020/05/01/hello-world/">Hello World</a>
           </li>
         
       </ul>

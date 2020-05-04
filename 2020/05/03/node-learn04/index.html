@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>node-learn04 | 异次元空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-learn04">
+<meta property="og:url" content="http://yoursite.com/2020/05/03/node-learn04/index.html">
+<meta property="og:site_name" content="异次元空间">
+<meta property="og:description" content="nodejs学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-03T12:28:51.000Z">
+<meta property="article:modified_time" content="2020-05-03T12:29:46.350Z">
+<meta property="article:author" content="如舟">
+<meta property="article:tag" content="nodejs-learn">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">异次元空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-learn04" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/03/node-learn04/" class="article-date">
+  <time datetime="2020-05-03T12:28:51.000Z" itemprop="datePublished">2020-05-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node-learn04
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-callback.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong><code>Node.js</code> 回调函数</strong></p>
+<p><code>Node.js</code> 异步编程的直接体现就是回调。异步编程借助于回调来实现，但不能说使用了回调后程序就异步化了。回调函数在完成任务后就会被调用，Node 所有 <code>API</code> 都支持回调函数。</p>
+<p>例如，程序可以一边读取文件，一边执行其他命令，在文件读取完成后，将文件内容作为回调函数的参数返回。这样在执行代码时就没有阻塞或等待文件 I/O 操作。这极大地提高了 <code>Node.js</code> 的性能，可以处理大量的并发请求。</p>
+<p>回调函数一般作为函数的最后一个参数出现：</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function foo1(name, age, callback) &#123; &#125;</span><br><span class="line">function foo2(value, callback1, callback2) &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="阻塞代码实例"><a href="#阻塞代码实例" class="headerlink" title="阻塞代码实例"></a>阻塞代码实例</h2><p>创建一个文件 <code>input.txt</code> ，内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我的学习地址：www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>创建 <code>fileLoad.js</code> 文件, 代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var fs &#x3D; require(&#39;fs&#39;);</span><br><span class="line"></span><br><span class="line">console.log(&#39;程序同步读取文件……&#39;);</span><br><span class="line"></span><br><span class="line">var data &#x3D; fs.readFileSync(&#39;input.txt&#39;);</span><br><span class="line"></span><br><span class="line">console.log(&#39;程序同步读取文件完毕&#39;);</span><br><span class="line">console.log(data.toString());</span><br><span class="line">console.log(&#39;程序执行结束&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node fileLoad.js</span><br><span class="line">程序同步读取文件……</span><br><span class="line">程序同步读取文件完毕</span><br><span class="line">我的学习地址：www.runoob.com</span><br><span class="line"></span><br><span class="line">程序执行结束</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="非阻塞代码实例"><a href="#非阻塞代码实例" class="headerlink" title="非阻塞代码实例"></a>非阻塞代码实例</h2><p>创建 <code>fileLoadAsync.js</code> 文件, 代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var fs &#x3D; require(&#39;fs&#39;);</span><br><span class="line"></span><br><span class="line">console.log(&#39;程序异步读取文件……&#39;);</span><br><span class="line"></span><br><span class="line">fs.readFile(&#39;input.txt&#39;,function(err,data)&#123;</span><br><span class="line"> if(err) return console.error(err);</span><br><span class="line"></span><br><span class="line"> console.log(&#39;程序异步读取文件完毕&#39;);</span><br><span class="line"> console.log(data.toString());</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(&#39;程序执行结束&#39;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ node fileLoadAsync.js</span><br><span class="line">程序异步读取文件……</span><br><span class="line">程序执行结束</span><br><span class="line">程序异步读取文件完毕</span><br><span class="line">我的学习地址：www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>以上两个实例我们了解了阻塞与非阻塞调用的不同。第一个实例在文件读取完后才执行程序。 第二个实例我们不需要等待文件读取完，这样就可以在读取文件时同时执行接下来的代码，大大提高了程序的性能。</p>
+<p>因此，阻塞是按顺序执行的，而非阻塞是不需要按顺序的，所以如果需要处理回调函数的参数，我们就需要写在回调函数内。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/03/node-learn04/" data-id="ck9rzjhk70009h1ynhgsufun7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/04/node-learn05/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node-learn05
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/03/node-learn03/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">node-learn03</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs-learn/" rel="tag">nodejs-learn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/nodejs-learn/" style="font-size: 20px;">nodejs-learn</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/04/node-learn05/">node-learn05</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn04/">node-learn04</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn03/">node-learn03</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn02/">node-learn02</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/02/node-learn01/">node-learn01</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 如舟<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
