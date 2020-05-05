@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>node-learn06 | 异次元空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-learn06">
+<meta property="og:url" content="http://yoursite.com/2020/05/04/node-learn06/index.html">
+<meta property="og:site_name" content="异次元空间">
+<meta property="og:description" content="nodejs学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-04T09:34:41.000Z">
+<meta property="article:modified_time" content="2020-05-05T06:23:42.722Z">
+<meta property="article:author" content="如舟">
+<meta property="article:tag" content="nodejs系列">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">异次元空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-learn06" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/05/04/node-learn06/" class="article-date">
+  <time datetime="2020-05-04T09:34:41.000Z" itemprop="datePublished">2020-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node-learn06
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-event.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong>Node.js EventEmitter</strong></p>
+<p>Node.js 所有的异步 I/O 操作在完成时都会发送一个事件到事件队列。</p>
+<p>Node.js 里面的许多对象都会分发事件：一个 net.Server 对象会在每次有新连接时触发一个事件， 一个 fs.readStream 对象会在文件被打开的时候触发一个事件。 所有这些产生事件的对象都是 events.EventEmitter 的实例。</p>
+<p><strong>EventEmitter 类</strong></p>
+<a id="more"></a>
+<p>events 模块只提供了一个对象： events.EventEmitter。EventEmitter 的核心就是事件触发与事件监听器功能的封装。</p>
+<p>EventEmitter 对象如果在实例化时发生错误，会触发 error 事件。当添加新的监听器时，newListener 事件会触发，当监听器被移除时，removeListener 事件被触发。</p>
+<p>下面我们用一个简单的例子(<code>event-demo02.js</code>)说明 EventEmitter 的用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</span><br><span class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> EventEmitter();</span><br><span class="line">event.on(<span class="string">'some_event'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'some_event 事件触发'</span>);</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line"> setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   event.emit(<span class="string">'some_event'</span>);</span><br><span class="line">   &#125;,<span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node event-demo02.js</span><br><span class="line">some_event 事件触发</span><br></pre></td></tr></table></figure>
+
+<p>运行这段代码，1 秒后控制台输出了 <strong><code>some_event 事件触发</code></strong>。其原理是 event 对象注册了事件 some_event 的一个监听器，然后我们通过 setTimeout 在 1000 毫秒以后向 event 对象发送事件 some_event，此时会调用some_event 的监听器。</p>
+<p>EventEmitter 的每个事件由一个事件名和若干个参数组成，事件名是一个字符串，通常表达一定的语义。对于每个事件，EventEmitter 支持 若干个事件监听器。</p>
+<p>当事件触发时，注册到这个事件的事件监听器被依次调用，事件参数作为回调函数参数传递。</p>
+<p>下面的例子(<code>event-demo03.js</code>)解释这个过程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter();</span><br><span class="line"></span><br><span class="line">emitter.on(<span class="string">'someEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'listener1'</span>,arg1,arg2);</span><br><span class="line"> &#125;);</span><br><span class="line"></span><br><span class="line">emitter.on(<span class="string">'someEvent'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">arg1,arg2</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'listener2'</span>,arg1,arg2);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"> emitter.emit(<span class="string">'someEvent'</span>,<span class="string">'arg1 参数'</span>,<span class="string">'arg2 参数'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>执行以上代码，运行的结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node event-demo03.js</span><br><span class="line">listener1 arg1 参数 arg2 参数</span><br><span class="line">listener2 arg1 参数 arg2 参数</span><br></pre></td></tr></table></figure>
+
+<p>上面例子中，emitter 为事件 someEvent 注册了两个事件监听器，然后触发了 someEvent 事件。</p>
+<p>运行结果中可以看到两个事件监听器回调函数被先后调用。 </p>
+<p>EventEmitter 提供了多个属性，如 <strong>on</strong> 和 <strong>emit</strong>。<strong>on</strong> 函数用于绑定事件函数，<strong>emit</strong> 属性用于触发一个事件。接下来我们来具体看下 EventEmitter 的属性介绍。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>addListener(event, listener)</strong></td>
+<td>为指定事件添加一个监听器到监听器数组的尾部。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>on(event, listener)</strong></td>
+<td>为指定事件注册一个监听器，接受一个字符串 event 和一个回调函数。</td>
+<td><code>server.on(&#39;connection&#39;, function (stream) {   console.log(&#39;someone connected!&#39;); });</code></td>
+</tr>
+<tr>
+<td><strong>once(event, listener)</strong></td>
+<td>为指定事件注册一个单次监听器，即 监听器最多只会触发一次，触发后立刻解除该监听器。</td>
+<td><code>server.once(&#39;connection&#39;, function (stream) {   console.log(&#39;Ah, we have our first user!&#39;); });</code></td>
+</tr>
+<tr>
+<td><strong>removeListener(event, listener)</strong></td>
+<td>移除指定事件的某个监听器，监听器必须是该事件已经注册过的监听器。第一个是事件名称，第二个是回调函数名称。</td>
+<td><code>var callback = function(stream) {   console.log(&#39;someone connected!&#39;); }; server.on(&#39;connection&#39;, callback); // ... server.removeListener(&#39;connection&#39;, callback);</code></td>
+</tr>
+<tr>
+<td><strong>removeAllListeners([event])</strong></td>
+<td>移除所有事件的所有监听器， 如果指定事件，则移除指定事件的所有监听器。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>listeners(event)</strong></td>
+<td>返回指定事件的监听器数组。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>emit(event, [arg1], [arg2], […])</strong></td>
+<td>按监听器的顺序执行执行每个监听器，如果事件有注册监听返回 true，否则返回 false。</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>类方法</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>listenerCount(emitter, event)</strong></td>
+<td>返回指定事件的监听器数量。</td>
+<td><code>eventEmitter.listenerCount(eventName)</code></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>newListener</strong></td>
+<td><strong>event</strong> - 字符串，事件名称<br><strong>listener</strong> - 处理事件函数<br>该事件在添加新监听器时被触发。</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>removeListener</strong></td>
+<td><strong>event</strong> - 字符串，事件名称 <br><strong>listener</strong> - 处理事件函数<br>从指定监听器数组中删除一个监听器。需要注意的是，此操作将会改变处于被删监听器之后的那些监听器的索引。</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>实例</strong></p>
+<p>以下实例通过 connection（连接）事件演示了 EventEmitter 类的应用。</p>
+<p>创建 event-demo04.js 文件，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>);</span><br><span class="line"><span class="keyword">var</span> eventEmitter = <span class="keyword">new</span> events.EventEmitter();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听器 #1</span></span><br><span class="line"><span class="keyword">var</span> listener1 = <span class="function"><span class="keyword">function</span> <span class="title">listener1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'监听器 listener1 执行。'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听器 #2</span></span><br><span class="line"><span class="keyword">var</span> listener2 = <span class="function"><span class="keyword">function</span> <span class="title">listener2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'监听器 listener2 执行。'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绑定 connection 事件，处理函数为 listener1</span></span><br><span class="line">eventEmitter.addListener(<span class="string">'connection'</span>,listener1);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绑定 connection 事件，处理函数为 listener2</span></span><br><span class="line">eventEmitter.on(<span class="string">'connection'</span>,listener2);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> eventListeners = eventEmitter.listenerCount(<span class="string">'connection'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(eventListeners + <span class="string">'个监听器监听连接事件。'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理 connection 事件</span></span><br><span class="line">eventEmitter.emit(<span class="string">'connection'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除绑定的 listener1 函数</span></span><br><span class="line">eventEmitter.removeListener(<span class="string">'connection'</span>,listener1);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'listener1 不再受监听。'</span>);</span><br><span class="line"></span><br><span class="line">eventListeners = eventEmitter.listenerCount(<span class="string">'connection'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(eventListeners + <span class="string">" 个监听器监听连接事件。"</span>);</span><br><span class="line"><span class="comment">// 处理 connection 事件</span></span><br><span class="line">eventEmitter.emit(<span class="string">'connection'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕。"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码，执行结果如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ node event-demo04.js</span><br><span class="line"><span class="number">2</span>个监听器监听连接事件。</span><br><span class="line">监听器 listener1 执行。</span><br><span class="line">监听器 listener2 执行。</span><br><span class="line">listener1 不再受监听。</span><br><span class="line"><span class="number">1</span> 个监听器监听连接事件。</span><br><span class="line">监听器 listener2 执行。</span><br><span class="line">程序执行完毕。</span><br></pre></td></tr></table></figure>
+
+<p><strong>error 事件</strong></p>
+<p>EventEmitter 定义了一个特殊的事件 error，它包含了错误的语义，我们在遇到 异常的时候通常会触发 error 事件。</p>
+<p>当 error 被触发时，EventEmitter 规定如果没有响 应的监听器，Node.js 会把它当作异常，退出程序并输出错误信息。</p>
+<p>一般要为触发 error 事件的对象设置监听器，避免遇到错误后整个程序崩溃。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> events = <span class="built_in">require</span>(<span class="string">'events'</span>); </span><br><span class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> events.EventEmitter(); </span><br><span class="line">emitter.emit(<span class="string">'error'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行时会显示以下错误：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$ node event-error-noHandle.js</span><br><span class="line">events.js:<span class="number">301</span></span><br><span class="line">    <span class="keyword">throw</span> err; <span class="comment">// Unhandled 'error' event</span></span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line"><span class="built_in">Error</span> [ERR_UNHANDLED_ERROR]: Unhandled error. (<span class="literal">undefined</span>)</span><br><span class="line">    at EventEmitter.emit (events.js:<span class="number">299</span>:<span class="number">17</span>)</span><br><span class="line">    at <span class="built_in">Object</span>.&lt;anonymous&gt; (G:\Projects\nodejs\event-error-noHandle.js:<span class="number">3</span>:<span class="number">9</span>)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:<span class="number">1133</span>:<span class="number">30</span>)</span><br><span class="line">    at <span class="built_in">Object</span>.Module._extensions..js (internal/modules/cjs/loader.js:<span class="number">1153</span>:<span class="number">10</span>)[</span><br><span class="line"><span class="number">39</span>m</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:<span class="number">977</span>:<span class="number">32</span>)</span><br><span class="line">    at <span class="built_in">Function</span>.Module._load (internal/modules/cjs/loader.js:<span class="number">877</span>:<span class="number">14</span>)</span><br><span class="line">    at <span class="built_in">Function</span>.executeUserEntryPoint [<span class="keyword">as</span> runMain] (internal/modules/run_main.j</span><br><span class="line">s:<span class="number">74</span>:<span class="number">12</span>)</span><br><span class="line">    at internal/main/run_main_module.js:<span class="number">18</span>:<span class="number">47</span> &#123;</span><br><span class="line">  code: <span class="string">'ERR_UNHANDLED_ERROR'</span>,</span><br><span class="line">  context: <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>继承 EventEmitter</strong></p>
+<p>大多数时候我们不会直接使用 EventEmitter，而是在对象中继承它。包括 fs、net、 http 在内的，只要是支持事件响应的核心模块都是 EventEmitter 的子类。</p>
+<p>为什么要这样做呢？原因有两点：</p>
+<ol>
+<li><p>具有某个实体功能的对象实现事件符合语义， 事件的监听和发生应该是一个对象的方法。</p>
+</li>
+<li><p>JavaScript 的对象机制是基于原型的，支持 部分多重继承，继承 EventEmitter 不会打乱对象原有的继承关系。</p>
+</li>
+</ol>
+<p><strong>继承方式：</strong></p>
+<ol>
+<li><p>原型继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventEmitter  = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Client</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  eventEmitter.call(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Client.prototype.see = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'It is a see!'</span>)</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">Client.prototype.__proto__ = eventEmitter.prototype;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> client = <span class="keyword">new</span> Client();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收事件</span></span><br><span class="line">    client.on(<span class="string">'see'</span>, client.see)</span><br><span class="line">    <span class="comment">//发送事件</span></span><br><span class="line">    client.emit(<span class="string">'see'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'程序执行结束'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node event-prototype.js</span><br><span class="line">It is a see!</span><br><span class="line">程序执行结束</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>类继承法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span> <span class="keyword">extends</span> <span class="title">EventEmitter</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">      <span class="keyword">super</span>()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">  see() &#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">'extends：It is a see!'</span>);</span><br><span class="line">          &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> client = <span class="keyword">new</span> Client();</span><br><span class="line">   <span class="comment">//接收事件</span></span><br><span class="line">   client.on(<span class="string">'see'</span>, client.see);</span><br><span class="line">   <span class="comment">//发送事件</span></span><br><span class="line">   client.emit(<span class="string">'see'</span>);</span><br><span class="line"></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'程序执行结束'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node event-extend.js</span><br><span class="line">extends：It is a see!</span><br><span class="line">程序执行结束</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>对象继承</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> EventEmitter  = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> client = &#123;</span><br><span class="line">  see() &#123;</span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">'object：It is a see!'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">client.__proto__ = EventEmitter.prototype;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// Subscribe to event.</span></span><br><span class="line">    client.on(<span class="string">"see"</span>, client.see);</span><br><span class="line">    <span class="comment">// Emit event.</span></span><br><span class="line">    client.emit(<span class="string">"see"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'程序执行结束'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node event-object.js</span><br><span class="line">object：It is a see!</span><br><span class="line">程序执行结束</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/05/04/node-learn06/" data-id="ck9tjaezf000cpmynfzk38bpk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/05/05/node-learn07/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node-learn07
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/05/04/node-learn05/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">node-learn05</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/nodejs%E7%B3%BB%E5%88%97/" style="font-size: 20px;">nodejs系列</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 10px;">博客</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/05/05/node-learn07/">node-learn07</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/node-learn06/">node-learn06</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/04/node-learn05/">node-learn05</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn04/">node-learn04</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/03/node-learn03/">node-learn03</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 如舟<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
