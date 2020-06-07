@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>node-learn14 | 异次元空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-learn14">
+<meta property="og:url" content="http://yoursite.com/2020/06/06/node-learn14/index.html">
+<meta property="og:site_name" content="异次元空间">
+<meta property="og:description" content="nodejs学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-06T13:59:40.000Z">
+<meta property="article:modified_time" content="2020-06-06T13:59:40.555Z">
+<meta property="article:author" content="如舟">
+<meta property="article:tag" content="nodejs系列">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">异次元空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-learn14" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/06/node-learn14/" class="article-date">
+  <time datetime="2020-06-06T13:59:40.000Z" itemprop="datePublished">2020-06-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node-learn14
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-fs.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong>Node.js 文件系统</strong></p>
+<p>Node.js 提供一组类似 UNIX（POSIX）标准的文件操作API。 Node 导入文件系统模块(fs)语法如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>异步和同步</strong><br>Node.js 文件系统（fs 模块）模块中的方法均有异步和同步版本，例如读取文件内容的函数有异步的 fs.readFile() 和同步的 fs.readFileSync()。异步的方法函数最后一个参数为回调函数，回调函数的第一个参数包含了错误信息(error)。建议大家使用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。</p>
+<p><strong>实例</strong></p>
+<p>创建 input.txt 文件，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">菜鸟教程官网地址：www.runoob.com</span><br><span class="line">文件读取实例</span><br></pre></td></tr></table></figure>
+
+<p>创建 file.js 文件, 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步读取</span></span><br><span class="line">fs.readFile(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"异步读取: "</span> + data.toString());</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步读取</span></span><br><span class="line"><span class="keyword">var</span> data = fs.readFileSync(<span class="string">'input.txt'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"同步读取: "</span> + data.toString());</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"程序执行完毕。"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">同步读取: 菜鸟教程官网地址：www.runoob.com</span><br><span class="line">文件读取实例</span><br><span class="line"></span><br><span class="line">程序执行完毕。</span><br><span class="line">异步读取: 菜鸟教程官网地址：www.runoob.com</span><br><span class="line">文件读取实例</span><br></pre></td></tr></table></figure>
+
+<p>接下来，让我们来具体了解下 Node.js 文件系统的方法。</p>
+<p><strong>打开文件</strong></p>
+<p>以下为在异步模式下打开文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.open(path, flags[, mode], callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件的路径。</li>
+<li><strong>flags</strong> - 文件打开的行为。具体值详见下文。</li>
+<li><strong>mode</strong> - 设置文件模式(权限)，文件创建默认权限为 0666(可读，可写)。</li>
+<li><strong>callback</strong> - 回调函数，带有两个参数如：callback(err, fd)。</li>
+</ul>
+<p>flags 参数可以是以下值：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Flag</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">r</td>
+<td align="left">以读取模式打开文件。如果文件不存在抛出异常。</td>
+</tr>
+<tr>
+<td align="left">r+</td>
+<td align="left">以读写模式打开文件。如果文件不存在抛出异常。</td>
+</tr>
+<tr>
+<td align="left">rs</td>
+<td align="left">以同步的方式读取文件。</td>
+</tr>
+<tr>
+<td align="left">rs+</td>
+<td align="left">以同步的方式读取和写入文件。</td>
+</tr>
+<tr>
+<td align="left">w</td>
+<td align="left">以写入模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td align="left">wx</td>
+<td align="left">类似 ‘w’，但是如果文件路径存在，则文件写入失败。</td>
+</tr>
+<tr>
+<td align="left">w+</td>
+<td align="left">以读写模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td align="left">wx+</td>
+<td align="left">类似 ‘w+’， 但是如果文件路径存在，则文件读写失败。</td>
+</tr>
+<tr>
+<td align="left">a</td>
+<td align="left">以追加模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td align="left">ax</td>
+<td align="left">类似 ‘a’， 但是如果文件路径存在，则文件追加失败。</td>
+</tr>
+<tr>
+<td align="left">a+</td>
+<td align="left">以读取追加模式打开文件，如果文件不存在则创建。</td>
+</tr>
+<tr>
+<td align="left">ax+</td>
+<td align="left">类似 ‘a+’， 但是如果文件路径存在，则文件读取追加失败。</td>
+</tr>
+</tbody></table>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，并打开 input.txt 文件进行读写，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步打开文件</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备打开文件！"</span>);</span><br><span class="line">fs.open(<span class="string">'input.txt'</span>, <span class="string">'r+'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, fd</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"文件打开成功！"</span>);     </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备打开文件！</span><br><span class="line">文件打开成功！</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取文件信息</strong></p>
+<p>以下为通过异步模式获取文件信息的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.stat(path, callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，带有两个参数如：(err, stats), <strong>stats</strong> 是 fs.Stats 对象。</li>
+</ul>
+<p>fs.stat(path)执行后，会将stats类的实例返回给其回调函数。可以通过stats类中的提供方法判断文件的相关属性。例如判断是否为文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.stat(<span class="string">'/Users/liuht/code/itbilu/demo/fs.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, stats</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(stats.isFile());         <span class="comment">//true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>stats类中的方法有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">stats.isFile()</td>
+<td align="left">如果是文件返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left">stats.isDirectory()</td>
+<td align="left">如果是目录返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left">stats.isBlockDevice()</td>
+<td align="left">如果是块设备返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left">stats.isCharacterDevice()</td>
+<td align="left">如果是字符设备返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left">stats.isSymbolicLink()</td>
+<td align="left">如果是软链接返回 true，否则返回 false。</td>
+</tr>
+<tr>
+<td align="left">stats.isFIFO()</td>
+<td align="left">如果是FIFO，返回true，否则返回 false。FIFO是UNIX中的一种特殊类型的命令管道。</td>
+</tr>
+<tr>
+<td align="left">stats.isSocket()</td>
+<td align="left">如果是 Socket 返回 true，否则返回 false。</td>
+</tr>
+</tbody></table>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备打开文件！"</span>);</span><br><span class="line">fs.stat(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, stats</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(stats);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"读取文件信息成功！"</span>);</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 检测文件类型</span></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"是否为文件(isFile) ? "</span> + stats.isFile());</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"是否为目录(isDirectory) ? "</span> + stats.isDirectory());    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备打开文件！</span><br><span class="line">&#123; <span class="attr">dev</span>: <span class="number">16777220</span>,</span><br><span class="line">  mode: <span class="number">33188</span>,</span><br><span class="line">  nlink: <span class="number">1</span>,</span><br><span class="line">  uid: <span class="number">501</span>,</span><br><span class="line">  gid: <span class="number">20</span>,</span><br><span class="line">  rdev: <span class="number">0</span>,</span><br><span class="line">  blksize: <span class="number">4096</span>,</span><br><span class="line">  ino: <span class="number">40333161</span>,</span><br><span class="line">  size: <span class="number">61</span>,</span><br><span class="line">  blocks: <span class="number">8</span>,</span><br><span class="line">  atime: Mon Sep <span class="number">07</span> <span class="number">2015</span> <span class="number">17</span>:<span class="number">43</span>:<span class="number">55</span> GMT+<span class="number">0800</span> (CST),</span><br><span class="line">  mtime: Mon Sep <span class="number">07</span> <span class="number">2015</span> <span class="number">17</span>:<span class="number">22</span>:<span class="number">35</span> GMT+<span class="number">0800</span> (CST),</span><br><span class="line">  ctime: Mon Sep <span class="number">07</span> <span class="number">2015</span> <span class="number">17</span>:<span class="number">22</span>:<span class="number">35</span> GMT+<span class="number">0800</span> (CST) &#125;</span><br><span class="line">读取文件信息成功！</span><br><span class="line">是否为文件(isFile) ? <span class="literal">true</span></span><br><span class="line">是否为目录(isDirectory) ? <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>写入文件</strong></p>
+<p>以下为异步模式下写入文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data[, options], callback)</span><br></pre></td></tr></table></figure>
+
+<p>writeFile 直接打开文件默认是 <strong>w</strong> 模式，所以如果文件存在，该方法写入的内容会覆盖旧的文件内容。</p>
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>file</strong> - 文件名或文件描述符。</li>
+<li><strong>data</strong> - 要写入文件的数据，可以是 String(字符串) 或 Buffer(缓冲) 对象。</li>
+<li><strong>options</strong> - 该参数是一个对象，包含 {encoding, mode, flag}。默认编码为 utf8, 模式为 0666 ， flag 为 ‘w’</li>
+<li><strong>callback</strong> - 回调函数，回调函数只包含错误信息参数(err)，在写入失败时返回。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备写入文件"</span>);</span><br><span class="line">fs.writeFile(<span class="string">'input.txt'</span>, <span class="string">'我是通 过fs.writeFile 写入文件的内容'</span>,  <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"数据写入成功！"</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"--------我是分割线-------------"</span>)</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"读取写入的数据！"</span>);</span><br><span class="line">   fs.readFile(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">         <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"异步读取文件数据: "</span> + data.toString());</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备写入文件</span><br><span class="line">数据写入成功！</span><br><span class="line">--------我是分割线-------------</span><br><span class="line">读取写入的数据！</span><br><span class="line">异步读取文件数据: 我是通 过fs.writeFile 写入文件的内容</span><br></pre></td></tr></table></figure>
+
+<p><strong>读取文件</strong></p>
+<p>以下为异步模式下读取文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.read(fd, buffer, offset, length, position, callback)</span><br></pre></td></tr></table></figure>
+
+<p>该方法使用了文件描述符来读取文件。</p>
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的文件描述符。</li>
+<li><strong>buffer</strong> - 数据写入的缓冲区。</li>
+<li><strong>offset</strong> - 缓冲区写入的写入偏移量。</li>
+<li><strong>length</strong> - 要从文件中读取的字节数。</li>
+<li><strong>position</strong> - 文件读取的起始位置，如果 position 的值为 null，则会从当前文件指针的位置读取。</li>
+<li><strong>callback</strong> - 回调函数，有三个参数err, bytesRead, buffer，err 为错误信息， bytesRead 表示读取的字节数，buffer 为缓冲区对象。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>input.txt 文件内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">菜鸟教程官网地址：www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer.alloc(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备打开已存在的文件！"</span>);</span><br><span class="line">fs.open(<span class="string">'input.txt'</span>, <span class="string">'r+'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, fd</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"文件打开成功！"</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"准备读取文件："</span>);</span><br><span class="line">   fs.read(fd, buf, <span class="number">0</span>, buf.length, <span class="number">0</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, bytes</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err)&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(err);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">console</span>.log(bytes + <span class="string">"  字节被读取"</span>);</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 仅输出读取的字节</span></span><br><span class="line">      <span class="keyword">if</span>(bytes &gt; <span class="number">0</span>)&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>, bytes).toString());</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备打开已存在的文件！</span><br><span class="line">文件打开成功！</span><br><span class="line">准备读取文件：</span><br><span class="line"><span class="number">42</span>  字节被读取</span><br><span class="line">菜鸟教程官网地址：www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭文件</strong></p>
+<p>以下为异步模式下关闭文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.close(fd, callback)</span><br></pre></td></tr></table></figure>
+
+<p>该方法使用了文件描述符来读取文件。</p>
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的文件描述符。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>input.txt 文件内容为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">菜鸟教程官网地址：www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer.alloc(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备打开文件！"</span>);</span><br><span class="line">fs.open(<span class="string">'input.txt'</span>, <span class="string">'r+'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, fd</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"文件打开成功！"</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"准备读取文件！"</span>);</span><br><span class="line">   fs.read(fd, buf, <span class="number">0</span>, buf.length, <span class="number">0</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, bytes</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err)&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(err);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 仅输出读取的字节</span></span><br><span class="line">      <span class="keyword">if</span>(bytes &gt; <span class="number">0</span>)&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>, bytes).toString());</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 关闭文件</span></span><br><span class="line">      fs.close(fd, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (err)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">         &#125; </span><br><span class="line">         <span class="built_in">console</span>.log(<span class="string">"文件关闭成功"</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备打开文件！</span><br><span class="line">文件打开成功！</span><br><span class="line">准备读取文件！</span><br><span class="line">菜鸟教程官网地址：www.runoob.com</span><br><span class="line">文件关闭成功</span><br></pre></td></tr></table></figure>
+
+<p><strong>截取文件</strong></p>
+<p>以下为异步模式下截取文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.ftruncate(fd, len, callback)</span><br></pre></td></tr></table></figure>
+
+<p>该方法使用了文件描述符来读取文件。</p>
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>fd</strong> - 通过 fs.open() 方法返回的文件描述符。</li>
+<li><strong>len</strong> - 文件内容截取的长度。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>input.txt 文件内容为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> buf = <span class="keyword">new</span> Buffer.alloc(<span class="number">1024</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备打开文件！"</span>);</span><br><span class="line">fs.open(<span class="string">'input.txt'</span>, <span class="string">'r+'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, fd</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"文件打开成功！"</span>);</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"截取10字节内的文件内容，超出部分将被去除。"</span>);</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 截取文件</span></span><br><span class="line">   fs.ftruncate(fd, <span class="number">10</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err)&#123;</span><br><span class="line">         <span class="built_in">console</span>.log(err);</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"文件截取成功。"</span>);</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"读取相同的文件"</span>); </span><br><span class="line">      fs.read(fd, buf, <span class="number">0</span>, buf.length, <span class="number">0</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, bytes</span>)</span>&#123;</span><br><span class="line">         <span class="keyword">if</span> (err)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err);</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="comment">// 仅输出读取的字节</span></span><br><span class="line">         <span class="keyword">if</span>(bytes &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(buf.slice(<span class="number">0</span>, bytes).toString());</span><br><span class="line">         &#125;</span><br><span class="line"></span><br><span class="line">         <span class="comment">// 关闭文件</span></span><br><span class="line">         fs.close(fd, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err)&#123;</span><br><span class="line">               <span class="built_in">console</span>.log(err);</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"文件关闭成功！"</span>);</span><br><span class="line">         &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备打开文件！</span><br><span class="line">文件打开成功！</span><br><span class="line">截取10字节内的文件内容，超出部分将被去除。</span><br><span class="line">文件截取成功。</span><br><span class="line">读取相同的文件</span><br><span class="line">site:www.r</span><br><span class="line">文件关闭成功</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除文件</strong></p>
+<p>以下为删除文件的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.unlink(path, callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>input.txt 文件内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:www.runoob.com</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备删除文件！"</span>);</span><br><span class="line">fs.unlink(<span class="string">'input.txt'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"文件删除成功！"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备删除文件！</span><br><span class="line">文件删除成功！</span><br></pre></td></tr></table></figure>
+
+<p>再去查看 input.txt 文件，发现已经不存在了。</p>
+<p><strong>创建目录</strong></p>
+<p>以下为创建目录的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.mkdir(path[, options], callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li>options 参数可以是：<ul>
+<li><strong>recursive</strong> - 是否以递归的方式创建目录，默认为 false。</li>
+<li><strong>mode</strong> - 设置目录权限，默认为 0777。</li>
+</ul>
+</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="comment">// tmp 目录必须存在</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"创建目录 /tmp/test/"</span>);</span><br><span class="line">fs.mkdir(<span class="string">"/tmp/test/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"目录创建成功。"</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">创建目录 /tmp/test/</span><br><span class="line">目录创建成功。</span><br></pre></td></tr></table></figure>
+
+<p>可以添加 recursive: true 参数，不管创建的目录 /tmp 和 /tmp/a 是否存在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.mkdir(&#39;&#x2F;tmp&#x2F;a&#x2F;apple&#39;, &#123; recursive: true &#125;, (err) &#x3D;&gt; &#123;</span><br><span class="line">  if (err) throw err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>读取目录</strong></p>
+<p>以下为读取目录的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.readdir(path, callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，回调函数带有两个参数err, files，err 为错误信息，files 为 目录下的文件数组列表。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"查看 /tmp 目录"</span>);</span><br><span class="line">fs.readdir(<span class="string">"/tmp/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err, files</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   files.forEach( <span class="function"><span class="keyword">function</span> (<span class="params">file</span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log( file );</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">查看 /tmp 目录</span><br><span class="line">input.out</span><br><span class="line">output.out</span><br><span class="line">test</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除目录</strong></p>
+<p>以下为删除目录的语法格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.rmdir(path, callback)</span><br></pre></td></tr></table></figure>
+
+<p>参数使用说明如下：</p>
+<ul>
+<li><strong>path</strong> - 文件路径。</li>
+<li><strong>callback</strong> - 回调函数，没有参数。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>接下来我们创建 file.js 文件，代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="comment">// 执行前创建一个空的 /tmp/test 目录</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"准备删除目录 /tmp/test"</span>);</span><br><span class="line">fs.rmdir(<span class="string">"/tmp/test"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (err) &#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"读取 /tmp 目录"</span>);</span><br><span class="line">   fs.readdir(<span class="string">"/tmp/"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err, files</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">      &#125;javascript</span><br><span class="line">      files.forEach( <span class="function"><span class="keyword">function</span> (<span class="params">file</span>)</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log( file );</span><br><span class="line">      &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码执行结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ node file.js </span><br><span class="line">准备删除目录 /tmp/test</span><br><span class="line">读取 /tmp 目录</span><br><span class="line">……</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="文件模块方法参考手册"><a href="#文件模块方法参考手册" class="headerlink" title="文件模块方法参考手册"></a>文件模块方法参考手册</h2><p>以下为 Node.js 文件模块相同的方法列表：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>fs.rename(oldPath, newPath, callback)</strong></td>
+<td align="left">异步 rename().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.ftruncate(fd, len, callback)</strong></td>
+<td align="left">异步 ftruncate().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.ftruncateSync(fd, len)</strong></td>
+<td align="left">同步 ftruncate()</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.truncate(path, len, callback)</strong></td>
+<td align="left">异步 truncate().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.truncateSync(path, len)</strong></td>
+<td align="left">同步 truncate()</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.chown(path, uid, gid, callback)</strong></td>
+<td align="left">异步 chown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.chownSync(path, uid, gid)</strong></td>
+<td align="left">同步 chown()</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fchown(fd, uid, gid, callback)</strong></td>
+<td align="left">异步 fchown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fchownSync(fd, uid, gid)</strong></td>
+<td align="left">同步 fchown()</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lchown(path, uid, gid, callback)</strong></td>
+<td align="left">异步 lchown().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lchownSync(path, uid, gid)</strong></td>
+<td align="left">同步 lchown()</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.chmod(path, mode, callback)</strong></td>
+<td align="left">异步 chmod().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.chmodSync(path, mode)</strong></td>
+<td align="left">同步 chmod().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fchmod(fd, mode, callback)</strong></td>
+<td align="left">异步 fchmod().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fchmodSync(fd, mode)</strong></td>
+<td align="left">同步 fchmod().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lchmod(path, mode, callback)</strong></td>
+<td align="left">异步 lchmod().回调函数没有参数，但可能抛出异常。Only available on Mac OS X.</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lchmodSync(path, mode)</strong></td>
+<td align="left">同步 lchmod().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.stat(path, callback)</strong></td>
+<td align="left">异步 stat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lstat(path, callback)</strong></td>
+<td align="left">异步 lstat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fstat(fd, callback)</strong></td>
+<td align="left">异步 fstat(). 回调函数有两个参数 err, stats，stats 是 fs.Stats 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.statSync(path)</strong></td>
+<td align="left">同步 stat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.lstatSync(path)</strong></td>
+<td align="left">同步 lstat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fstatSync(fd)</strong></td>
+<td align="left">同步 fstat(). 返回 fs.Stats 的实例。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.link(srcpath, dstpath, callback)</strong></td>
+<td align="left">异步 link().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.linkSync(srcpath, dstpath)</strong></td>
+<td align="left">同步 link().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.symlink(srcpath, dstpath[, type], callback)</strong></td>
+<td align="left">异步 symlink().回调函数没有参数，但可能抛出异常。 type 参数可以设置为 ‘dir’, ‘file’, 或 ‘junction’ (默认为 ‘file’) 。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.symlinkSync(srcpath, dstpath[, type])</strong></td>
+<td align="left">同步 symlink().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readlink(path, callback)</strong></td>
+<td align="left">异步 readlink(). 回调函数有两个参数 err, linkString。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.realpath(path[, cache], callback)</strong></td>
+<td align="left">异步 realpath(). 回调函数有两个参数 err, resolvedPath。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.realpathSync(path[, cache])</strong></td>
+<td align="left">同步 realpath()。返回绝对路径。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.unlink(path, callback)</strong></td>
+<td align="left">异步 unlink().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.unlinkSync(path)</strong></td>
+<td align="left">同步 unlink().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.rmdir(path, callback)</strong></td>
+<td align="left">异步 rmdir().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.rmdirSync(path)</strong></td>
+<td align="left">同步 rmdir().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.mkdir(path[, mode], callback)</strong></td>
+<td align="left">异步 mkdir(2).回调函数没有参数，但可能抛出异常。 访问权限默认为 0777。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.mkdirSync(path[, mode])</strong></td>
+<td align="left">同步 mkdir().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readdir(path, callback)</strong></td>
+<td align="left">异步 readdir(3). 读取目录的内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readdirSync(path)</strong></td>
+<td align="left">同步 readdir().返回文件数组列表。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.close(fd, callback)</strong></td>
+<td align="left">异步 close().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.closeSync(fd)</strong></td>
+<td align="left">同步 close().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.open(path, flags[, mode], callback)</strong></td>
+<td align="left">异步打开文件。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.openSync(path, flags[, mode])</strong></td>
+<td align="left">同步 version of fs.open().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.utimes(path, atime, mtime, callback)</strong></td>
+<td align="left">修改文件时间戳，文件通过指定的文件路径。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.utimesSync(path, atime, mtime)</strong></td>
+<td align="left">修改文件时间戳，文件通过指定的文件路径。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.futimes(fd, atime, mtime, callback)</strong></td>
+<td align="left">修改文件时间戳，通过文件描述符指定。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.futimesSync(fd, atime, mtime)</strong></td>
+<td align="left">修改文件时间戳，通过文件描述符指定。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fsync(fd, callback)</strong></td>
+<td align="left">异步 fsync.回调函数没有参数，但可能抛出异常。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.fsyncSync(fd)</strong></td>
+<td align="left">同步 fsync.</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.write(fd, buffer, offset, length[, position], callback)</strong></td>
+<td align="left">将缓冲区内容写入到通过文件描述符指定的文件。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.write(fd, data[, position[, encoding]], callback)</strong></td>
+<td align="left">通过文件描述符 fd 写入文件内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.writeSync(fd, buffer, offset, length[, position])</strong></td>
+<td align="left">同步版的 fs.write()。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.writeSync(fd, data[, position[, encoding]])</strong></td>
+<td align="left">同步版的 fs.write().</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.read(fd, buffer, offset, length, position, callback)</strong></td>
+<td align="left">通过文件描述符 fd 读取文件内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readSync(fd, buffer, offset, length, position)</strong></td>
+<td align="left">同步版的 fs.read.</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readFile(filename[, options], callback)</strong></td>
+<td align="left">异步读取文件内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.readFileSync(filename[, options])</strong></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><strong>fs.writeFile(filename, data[, options], callback)</strong></td>
+<td align="left">异步写入文件内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.writeFileSync(filename, data[, options])</strong></td>
+<td align="left">同步版的 fs.writeFile。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.appendFile(filename, data[, options], callback)</strong></td>
+<td align="left">异步追加文件内容。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.appendFileSync(filename, data[, options])</strong></td>
+<td align="left">The 同步 version of fs.appendFile.</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.watchFile(filename[, options], listener)</strong></td>
+<td align="left">查看文件的修改。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.unwatchFile(filename[, listener])</strong></td>
+<td align="left">停止查看 filename 的修改。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.watch(filename[, options][, listener])</strong></td>
+<td align="left">查看 filename 的修改，filename 可以是文件或目录。返回 fs.FSWatcher 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.exists(path, callback)</strong></td>
+<td align="left">检测给定的路径是否存在。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.existsSync(path)</strong></td>
+<td align="left">同步版的 fs.exists.</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.access(path[, mode], callback)</strong></td>
+<td align="left">测试指定路径用户权限。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.accessSync(path[, mode])</strong></td>
+<td align="left">同步版的 fs.access。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.createReadStream(path[, options])</strong></td>
+<td align="left">返回ReadStream 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.createWriteStream(path[, options])</strong></td>
+<td align="left">返回 WriteStream 对象。</td>
+</tr>
+<tr>
+<td align="left"><strong>fs.symlink(srcpath, dstpath[, type], callback)</strong></td>
+<td align="left">异步 symlink().回调函数没有参数，但可能抛出异常。</td>
+</tr>
+</tbody></table>
+<p>更多内容，请查看官网文件模块描述：<a href="https://nodejs.org/api/fs.html#fs_fs_rename_oldpath_newpath_callback" target="_blank" rel="noopener">File System</a>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/06/node-learn14/" data-id="ckb4hi9vu0001gxyn26si4cwa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/06/07/node-learn15/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          node-learn15
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/06/node-learn13/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">node-learn13</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Start/" rel="tag">Start</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Start/" style="font-size: 10px;">Start</a> <a href="/tags/nodejs%E7%B3%BB%E5%88%97/" style="font-size: 20px;">nodejs系列</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/07/node-learn16/">node-learn16</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/node-learn15/">node-learn15</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/node-learn14/">node-learn14</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/06/node-learn13/">node-learn13</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/01/node-learn12/">node-learn12</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 如舟<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
