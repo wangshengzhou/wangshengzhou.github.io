@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>node-learn19 | 异次元空间</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="nodejs学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-learn19">
+<meta property="og:url" content="http://yoursite.com/2020/06/14/node-learn19/index.html">
+<meta property="og:site_name" content="异次元空间">
+<meta property="og:description" content="nodejs学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-14T14:39:03.000Z">
+<meta property="article:modified_time" content="2020-06-14T14:39:03.992Z">
+<meta property="article:author" content="如舟">
+<meta property="article:tag" content="nodejs系列">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="异次元空间" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">异次元空间</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-node-learn19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/06/14/node-learn19/" class="article-date">
+  <time datetime="2020-06-14T14:39:03.000Z" itemprop="datePublished">2020-06-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Nodejs/">Nodejs</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      node-learn19
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>前言：</strong><br>现在抽点时间来学习nodejs，发现菜鸟教程讲解通俗易懂方便新手入门，所以决定每读一篇都会动手实践下，期间会把重要的步骤和操作过程记下来，毕竟只看不练，很快就会忘记且不便于理解<br><a href="https://www.runoob.com/nodejs/nodejs-restful-api.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+<p><strong>Node.js RESTful API</strong></p>
+<p><strong>什么是 REST？</strong><br>REST即表述性状态传递（英文：Representational State Transfer，简称REST）是Roy Fielding博士在2000年他的博士论文中提出来的一种软件架构风格。</p>
+<a id="more"></a>
+<p>表述性状态转移是一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是RESTful。需要注意的是，REST是设计风格而不是标准。REST通常基于使用HTTP，URI，和XML（标准通用标记语言下的一个子集）以及HTML（标准通用标记语言下的一个应用）这些现有的广泛流行的协议和标准。REST 通常使用 JSON 数据格式。</p>
+<p><strong>HTTP 方法</strong><br>以下为 REST 基本架构的四个方法：</p>
+<ul>
+<li><strong>GET</strong> - 用于获取数据。</li>
+<li><strong>PUT</strong> - 用于更新或添加数据。</li>
+<li><strong>DELETE</strong> - 用于删除数据。</li>
+<li><strong>POST</strong> - 用于添加数据。</li>
+</ul>
+<hr>
+<p><strong>RESTful Web Services</strong></p>
+<p>Web service是一个平台独立的，低耦合的，自包含的、基于可编程的web的应用程序，可使用开放的XML（标准通用标记语言下的一个子集）标准来描述、发布、发现、协调和配置这些应用程序，用于开发分布式的互操作的应用程序。</p>
+<p>基于 REST 架构的 Web Services 即是 RESTful。</p>
+<p>由于轻量级以及通过 HTTP 直接传输数据的特性，Web 服务的 RESTful 方法已经成为最常见的替代方法。可以使用各种语言（比如 Java 程序、Perl、Ruby、Python、PHP 和 Javascript[包括 Ajax]）实现客户端。</p>
+<p>RESTful Web 服务通常可以通过自动客户端或代表用户的应用程序访问。但是，这种服务的简便性让用户能够与之直接交互，使用它们的 Web 浏览器构建一个 GET URL 并读取返回的内容。</p>
+<p>更多介绍，可以查看：<a href="https://www.runoob.com/w3cnote/restful-architecture.html" target="_blank" rel="noopener">RESTful 架构详解</a></p>
+<hr>
+<p><strong>创建 RESTful</strong></p>
+<p>首先，创建一个 json 数据资源文件 users.json，内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"user1"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"王明"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password1"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"teacher"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user2"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"周玲"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password2"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"librarian"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user3"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"Jack"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password3"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"clerk"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>基于以上数据，我们创建以下 RESTful API：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号</th>
+<th align="left">URI</th>
+<th align="left">HTTP 方法</th>
+<th align="left">发送内容</th>
+<th align="left">结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">listUsers</td>
+<td align="left">GET</td>
+<td align="left">空</td>
+<td align="left">显示所有用户列表</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">addUser/:id</td>
+<td align="left">POST</td>
+<td align="left">JSON 字符串</td>
+<td align="left">添加新用户</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">deleteUser/:id</td>
+<td align="left">DELETE</td>
+<td align="left">JSON 字符串</td>
+<td align="left">删除用户</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">:id</td>
+<td align="left">GET</td>
+<td align="left">空</td>
+<td align="left">显示用户详细信息</td>
+</tr>
+</tbody></table>
+<p><strong>获取用户列表：</strong></p>
+<p>以下代码，我们创建了 RESTful API <strong>listUsers</strong>，用于读取用户的信息列表， express-api.js 文件代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/listUsers'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   fs.readFile( __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log( data );</span><br><span class="line">       res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json; charset=UTF-8'</span>);</span><br><span class="line">       res.end( data );</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8081</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> host = server.address().address</span><br><span class="line">  <span class="keyword">var</span> port = server.address().port</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"应用实例，访问地址为 http://%s:%s"</span>, host, port)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下来执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node express-api.js </span><br><span class="line">应用实例，访问地址为 http:&#x2F;&#x2F;0.0.0.0:8081</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中访问 <a href="http://127.0.0.1:8081/listUsers，结果如下所示：" target="_blank" rel="noopener">http://127.0.0.1:8081/listUsers，结果如下所示：</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"user1"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"王明"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password1"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"teacher"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user2"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"周玲"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password2"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"librarian"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user3"</span> : &#123;</span><br><span class="line">       <span class="string">"name"</span> : <span class="string">"Jack"</span>,</span><br><span class="line">       <span class="string">"password"</span> : <span class="string">"password3"</span>,</span><br><span class="line">       <span class="string">"profession"</span> : <span class="string">"clerk"</span>,</span><br><span class="line">       <span class="string">"id"</span>: <span class="number">3</span></span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加用户</strong></p>
+<p>以下代码，我们创建了 RESTful API <strong>addUser</strong>， 用于添加新的用户数据，express-api.js 文件代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加的新用户数据</span></span><br><span class="line"><span class="keyword">var</span> user = &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"张三"</span>,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">"password4"</span>,</span><br><span class="line">    <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加用户</span></span><br><span class="line">app.get(<span class="string">'/addUser/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data_file = __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>;</span><br><span class="line">    <span class="comment">// 读取已存在的数据</span></span><br><span class="line">    fs.readFile(data_file, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">        user.id = req.params.id;</span><br><span class="line">        data[<span class="string">"user"</span> + req.params.id] = user;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line"></span><br><span class="line">        fs.writeFile(data_file, <span class="built_in">JSON</span>.stringify(data, <span class="string">''</span>, <span class="number">4</span>), <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(err);</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Data updated successfully'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            res.sendFile(data_file);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8081</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> host = server.address().address</span><br><span class="line">  <span class="keyword">var</span> port = server.address().port</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"应用实例，访问地址为 http://%s:%s"</span>, host, port)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下来执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node express-api.js </span><br><span class="line">应用实例，访问地址为 http:&#x2F;&#x2F;0.0.0.0:8081</span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中访问 <a href="http://127.0.0.1:8081/addUser/4，结果如下所示：" target="_blank" rel="noopener">http://127.0.0.1:8081/addUser/4，结果如下所示：</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"user1"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"王明"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password1"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user2"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"周玲"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password2"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"librarian"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user3"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"Jack"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password3"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"clerk"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">3</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user4"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"张三"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password4"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>显示用户详情</strong></p>
+<p>以下代码，我们创建了 RESTful API <strong>:id（用户id）</strong>， 用于读取指定用户的详细信息，express-api.js 文件代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 首先我们读取已存在的用户</span></span><br><span class="line">   fs.readFile( __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">       data = <span class="built_in">JSON</span>.parse( data );</span><br><span class="line">       <span class="keyword">var</span> user = data[<span class="string">"user"</span> + req.params.id] </span><br><span class="line">       <span class="built_in">console</span>.log( user );</span><br><span class="line">       res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json; charset=UTF-8'</span>); </span><br><span class="line">       res.end( <span class="built_in">JSON</span>.stringify(user));</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8081</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> host = server.address().address</span><br><span class="line">  <span class="keyword">var</span> port = server.address().port</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"应用实例，访问地址为 http://%s:%s"</span>, host, port)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下来执行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node express-api.js </span><br><span class="line">应用实例，访问地址为 http:<span class="comment">//0.0.0.0:8081</span></span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中访问 <a href="http://127.0.0.1:8081/2，结果如下所示：" target="_blank" rel="noopener">http://127.0.0.1:8081/2，结果如下所示：</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"name"</span>:<span class="string">"周玲"</span>,<span class="string">"password"</span>:<span class="string">"password2"</span>,<span class="string">"profession"</span>:<span class="string">"librarian"</span>,<span class="string">"id"</span>:<span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除用户</strong></p>
+<p>以下代码，我们创建了 RESTful API <strong>deleteUser</strong>， 用于删除指定用户的详细信息，以下实例中，用户 id 为 2，express-api.js 文件代码如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> id = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除用户</span></span><br><span class="line">app.get(<span class="string">'/deleteUser/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data_file = __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>;</span><br><span class="line"></span><br><span class="line">    fs.readFile(data_file, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">        <span class="keyword">delete</span> data[<span class="string">"user"</span> + req.params.id];</span><br><span class="line"></span><br><span class="line">        fs.writeFile(data_file, <span class="built_in">JSON</span>.stringify(data, <span class="string">''</span>, <span class="number">4</span>), <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(err);</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Data updated successfully'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            res.sendFile(data_file);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8081</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> host = server.address().address</span><br><span class="line">  <span class="keyword">var</span> port = server.address().port</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"应用实例，访问地址为 http://%s:%s"</span>, host, port)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>接下来执行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ node express-api.js </span><br><span class="line">应用实例，访问地址为 http:<span class="comment">//0.0.0.0:8081</span></span><br></pre></td></tr></table></figure>
+
+<p>在浏览器中访问 <a href="http://127.0.0.1:8081/deleteUser/4，结果如下所示：" target="_blank" rel="noopener">http://127.0.0.1:8081/deleteUser/4，结果如下所示：</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"user1"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"王明"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password1"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user2"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"周玲"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password2"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"librarian"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user3"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"Jack"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password3"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"clerk"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="number">3</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"user5"</span>: &#123;</span><br><span class="line">        <span class="string">"name"</span>: <span class="string">"张三"</span>,</span><br><span class="line">        <span class="string">"password"</span>: <span class="string">"password4"</span>,</span><br><span class="line">        <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">        <span class="string">"id"</span>: <span class="string">"5"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>express-api.js 完整代码如下</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加的新用户数据</span></span><br><span class="line"><span class="keyword">var</span> user = &#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"张三"</span>,</span><br><span class="line">    <span class="string">"password"</span>: <span class="string">"password4"</span>,</span><br><span class="line">    <span class="string">"profession"</span>: <span class="string">"teacher"</span>,</span><br><span class="line">    <span class="string">"id"</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//显示列表</span></span><br><span class="line">app.get(<span class="string">'/listUsers'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//方法一</span></span><br><span class="line">    <span class="comment">/* fs.readFile(__dirname + "/" + "users.json", 'utf8', function (err, data) &#123;</span></span><br><span class="line"><span class="comment">        console.log(data);</span></span><br><span class="line"><span class="comment">        res.setHeader('Content-Type', 'application/json; charset=UTF-8');</span></span><br><span class="line"><span class="comment">        res.end(data);</span></span><br><span class="line"><span class="comment">    &#125;); */</span></span><br><span class="line">    <span class="comment">//方法二</span></span><br><span class="line">    res.sendFile(__dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加用户</span></span><br><span class="line">app.get(<span class="string">'/addUser/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data_file = __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>;</span><br><span class="line">    <span class="comment">// 读取已存在的数据</span></span><br><span class="line">    fs.readFile(data_file, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">        user.id = req.params.id;</span><br><span class="line">        data[<span class="string">"user"</span> + req.params.id] = user;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line"></span><br><span class="line">        fs.writeFile(data_file, <span class="built_in">JSON</span>.stringify(data, <span class="string">''</span>, <span class="number">4</span>), <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(err);</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Data updated successfully'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            res.sendFile(data_file);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//显示详情</span></span><br><span class="line">app.get(<span class="string">'/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 首先我们读取已存在的用户</span></span><br><span class="line">    fs.readFile(__dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">        <span class="keyword">var</span> user = data[<span class="string">"user"</span> + req.params.id]</span><br><span class="line">        <span class="built_in">console</span>.log(user);</span><br><span class="line">        res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/json; charset=UTF-8'</span>);</span><br><span class="line">        res.end(<span class="built_in">JSON</span>.stringify(user));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除用户</span></span><br><span class="line">app.get(<span class="string">'/deleteUser/:id'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data_file = __dirname + <span class="string">"/"</span> + <span class="string">"users.json"</span>;</span><br><span class="line"></span><br><span class="line">    fs.readFile(data_file, <span class="string">'utf8'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">        <span class="keyword">delete</span> data[<span class="string">"user"</span> + req.params.id];</span><br><span class="line"></span><br><span class="line">        fs.writeFile(data_file, <span class="built_in">JSON</span>.stringify(data, <span class="string">''</span>, <span class="number">4</span>), <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(err);</span><br><span class="line">                <span class="keyword">throw</span> err;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'Data updated successfully'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            res.sendFile(data_file);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = app.listen(<span class="number">8081</span>, <span class="string">'127.0.0.1'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> host = server.address().address</span><br><span class="line">    <span class="keyword">var</span> port = server.address().port</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"应用实例，访问地址为 http://%s:%s"</span>, host, port)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/06/14/node-learn19/" data-id="ckbf6cwh20000q8yn2xgt7ba0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/14/node-learn18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">node-learn18</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nodejs/">Nodejs</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Start/" rel="tag">Start</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs%E7%B3%BB%E5%88%97/" rel="tag">nodejs系列</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Start/" style="font-size: 10px;">Start</a> <a href="/tags/nodejs%E7%B3%BB%E5%88%97/" style="font-size: 20px;">nodejs系列</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/14/node-learn19/">node-learn19</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/14/node-learn18/">node-learn18</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/node-learn17/">node-learn17</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/node-learn16/">node-learn16</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/07/node-learn15/">node-learn15</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 如舟<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
